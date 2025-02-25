@@ -127,7 +127,7 @@
 
 </head>
 
-<body class="layout-3" style="background-color: #F5F5F5;">
+<body class="layout-3" style="background-color: #E5E4E2;">
   <div id="app">
     <div class="main-wrapper container-laptop">
       <!-- <div class="main-wrapper container container-laptop"> -->
@@ -360,21 +360,9 @@
       </nav>
 
       <nav class="navbar navbar-secondary navbar-expand-lg">
-        <div class="horizontal-scroll container-laptop">
+        <div class="container-laptop horizontal-scroll">
           <!-- <div class="container horizontal-scroll"> -->
           <ul class="navbar-nav">
-            
-           
-            <li class="nav-item dropdown space-up-menu">
-              <a href="#" data-toggle="dropdown" class="nav-link has-dropdown custom-dropdown size-font-menu">
-                  <i class="fas fa-fire"></i>
-                  <b class="space-text-menu">Dropdown</b>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-custom color-laptop">
-                  <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-fire"></i> Page</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-fire"></i> Modules</a></li>
-              </ul>
-            </li>
 
             <li class="nav-item dropdown space-up-menu">
               <a href="#" data-toggle="dropdown" class="nav-link has-dropdown custom-dropdown size-font-menu">
@@ -387,13 +375,6 @@
               </ul>
             </li>
           
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
-            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
             <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
           
             <li class="nav-item active dropdown space-up-menu">
@@ -471,58 +452,61 @@
         <div class="footer-left">
           Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
         </div>
-        <div class="footer-right">
-          
-        </div>
+        <div class="footer-right"></div>
       </footer>
     </div>
   </div>
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let activeDropdown = null;
-  
-        document.querySelectorAll(".nav-item.dropdown").forEach(function (dropdown) {
-            dropdown.addEventListener("click", function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-  
-                let menu = dropdown.querySelector(".dropdown-menu-custom");
-  
-                if (activeDropdown && activeDropdown !== menu) {
-                    activeDropdown.style.display = "none";
-                    activeDropdown.classList.remove("open");
-                    activeDropdown = null;
-                }
-  
-                if (menu.classList.contains("open")) {
-                    menu.style.display = "none";
-                    menu.classList.remove("open");
-                    activeDropdown = null;
-                } else {
-                    let rect = dropdown.getBoundingClientRect();
-  
-                    menu.classList.add("open");
-                    menu.style.position = "fixed";
-                    menu.style.top = rect.bottom - 15 + "px";
-                    menu.style.left = rect.left + "px";
-                    menu.style.zIndex = "1050";
-                    menu.style.display = "block"; 
-                    activeDropdown = menu;
-                }
-            });
-        });
 
-        document.addEventListener("click", function (event) {
-            if (activeDropdown && !event.target.closest(".nav-item.dropdown")) {
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let activeDropdown = null;
+
+    document.querySelectorAll(".nav-item.dropdown").forEach(function (dropdown) {
+        dropdown.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            let menu = dropdown.querySelector(".dropdown-menu-custom");
+
+            if (activeDropdown && activeDropdown !== menu) {
                 activeDropdown.style.display = "none";
                 activeDropdown.classList.remove("open");
                 activeDropdown = null;
             }
+
+            // Toggle dengan memeriksa display
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                menu.classList.remove("open");
+                activeDropdown = null;
+            } else {
+                let rect = dropdown.getBoundingClientRect();
+
+                menu.classList.add("open");
+                menu.style.position = "fixed";
+                menu.style.top = rect.bottom - 15 + "px";
+                menu.style.left = rect.left + "px";
+                menu.style.zIndex = "1050";
+                menu.style.display = "block";
+                activeDropdown = menu;
+            }
         });
     });
+
+    // Tutup dropdown jika klik di luar
+    document.addEventListener("click", function (event) {
+        if (activeDropdown && !event.target.closest(".nav-item.dropdown")) {
+            activeDropdown.style.display = "none";
+            activeDropdown.classList.remove("open");
+            activeDropdown = null;
+        }
+    });
+});
+
 </script>
+
 
 
   <!-- General JS Scripts -->

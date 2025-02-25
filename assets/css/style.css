@@ -2542,8 +2542,8 @@ body.layout-3 .navbar.navbar-secondary {
       font-weight: 600;
       letter-spacing: .3px;
       padding: 7px !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important; }
+      padding-left: 10px !important;
+      padding-right: 10px !important; }
       body.layout-3 .navbar.navbar-secondary .navbar-nav > .nav-item .dropdown-menu .nav-item .nav-link.has-dropdown:after {
         content: "";
         font-family: 'Font Awesome 5 Free';
