@@ -97,32 +97,19 @@
 
 /* Saat dropdown terbuka, tampilkan di luar scroll */
 .dropdown-menu-custom.open {
-    display: block;
+    display: block !important;
 }
 
 /* Default dropdown agar tidak muncul dalam scroll */
 .dropdown-menu-custom {
     display: none;
     background-color: #E5E4E2;
-    border-radius: 5px;
+    border-radius: 0px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Untuk scrollbar pada browser berbasis Webkit (Chrome, Safari) */
-.horizontal-scroll::-webkit-scrollbar {
-    height: 6px; /* Tinggi scrollbar */
 }
 
-.horizontal-scroll::-webkit-scrollbar-thumb {
-    background-color: #888; /* Warna thumb */
-    border-radius: 4px;
-}
-
-.horizontal-scroll::-webkit-scrollbar-track {
-    background: transparent; /* Track transparan */
-}
-
-}
 </style>
 
 </head>
@@ -133,8 +120,10 @@
       <!-- <div class="main-wrapper container container-laptop"> -->
       <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
-        <a href="index.html" class="navbar-brand sidebar-gone-hide">APP v2</a>
+        <a href="index.html" class="navbar-brand sidebar-gone-hide">SUPERMAN v2</a>
+        
         <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
+
         <div class="nav-collapse">
           <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
             <i class="fas fa-ellipsis-v"></i>
@@ -376,6 +365,17 @@
             </li>
           
             <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
+            <li class="nav-item space-up-menu"><a href="#" class="nav-link size-font-menu"><i class="far fa-heart"></i><b class="space-text-menu">Top Navigation</b></a></li>
           
             <li class="nav-item active dropdown space-up-menu">
               <a href="#" class="nav-link has-dropdown custom-dropdown size-font-menu"> 
@@ -457,57 +457,53 @@
     </div>
   </div>
 
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let activeDropdown = null;
-
-    document.querySelectorAll(".nav-item.dropdown").forEach(function (dropdown) {
-        dropdown.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-
-            let menu = dropdown.querySelector(".dropdown-menu-custom");
-
-            if (activeDropdown && activeDropdown !== menu) {
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let activeDropdown = null;
+    
+        document.addEventListener("click", function (event) {
+            let dropdown = event.target.closest(".nav-item.dropdown");
+    
+            // Jika yang diklik adalah dropdown
+            if (dropdown) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+    
+                let menu = dropdown.querySelector(".dropdown-menu-custom");
+                if (!menu) return; // Hindari error jika elemen tidak ditemukan
+    
+                // Tutup dropdown yang sedang aktif jika berbeda
+                if (activeDropdown && activeDropdown !== menu) {
+                    activeDropdown.style.display = "none";
+                    activeDropdown.classList.remove("open");
+                    activeDropdown = null;
+                }
+    
+                // Toggle dropdown
+                if (menu.style.display === "block") {
+                    menu.style.display = "none";
+                    menu.classList.remove("open");
+                    activeDropdown = null;
+                } else {
+                    let rect = dropdown.getBoundingClientRect();
+                    menu.classList.add("open");
+                    menu.style.position = "fixed";
+                    menu.style.top = rect.bottom - 15 + "px";
+                    menu.style.left = rect.left + "px";
+                    menu.style.zIndex = "1050";
+                    menu.style.display = "block";
+                    activeDropdown = menu;
+                }
+            } 
+            // Jika klik di luar dropdown, tutup menu yang aktif
+            else if (activeDropdown) {
                 activeDropdown.style.display = "none";
                 activeDropdown.classList.remove("open");
                 activeDropdown = null;
             }
-
-            // Toggle dengan memeriksa display
-            if (menu.style.display === "block") {
-                menu.style.display = "none";
-                menu.classList.remove("open");
-                activeDropdown = null;
-            } else {
-                let rect = dropdown.getBoundingClientRect();
-
-                menu.classList.add("open");
-                menu.style.position = "fixed";
-                menu.style.top = rect.bottom - 15 + "px";
-                menu.style.left = rect.left + "px";
-                menu.style.zIndex = "1050";
-                menu.style.display = "block";
-                activeDropdown = menu;
-            }
         });
     });
-
-    // Tutup dropdown jika klik di luar
-    document.addEventListener("click", function (event) {
-        if (activeDropdown && !event.target.closest(".nav-item.dropdown")) {
-            activeDropdown.style.display = "none";
-            activeDropdown.classList.remove("open");
-            activeDropdown = null;
-        }
-    });
-});
-
-</script>
-
-
+    </script>
 
   <!-- General JS Scripts -->
   <script src="assets/modules/jquery.min.js"></script>
